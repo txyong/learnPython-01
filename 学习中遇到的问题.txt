@@ -1,0 +1,4 @@
+将生成的key去掉ssh-rsa头和计算机名结尾的一段复制到github会出现如下报错  
+Key is invalid. It must begin with 'ssh-ed25519', 'ssh-rsa', 'ssh-dss', 'ecdsa-sha2-nistp256'
+完整复制该公钥key即可.
+
