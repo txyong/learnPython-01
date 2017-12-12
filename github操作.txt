@@ -1,0 +1,25 @@
+ubuntu下github使用
+
+配置本地设置
+git config --global user.name "使用的名称"
+git config --global user.email "邮箱"
+
+进入目录初始化仓库
+cd 目录名
+git init
+
+git status   #查看仓库当前状态，untracked为未同步的文件
+
+可用https加密码或用SSHKey方式连接
+ssh-keygen
+
+ #在本机生成密钥,回车使用默认配置即可,无需设置密钥密码.
+在~/.ssh目录里将.pub后缀的文件cat出来,复制到github上的SSH and GPG keys页面中.
+
+git clone 得到的github上的连接地址   #克隆到本地
+
+git add 文件名1 文件名2    #将新的或改动过的文件添加到本地索引中
+
+git commit -m "备注"    #做提交动作
+
+git push -u origin 分支名   #默认是master，首次加上分支名，以后就不需要了

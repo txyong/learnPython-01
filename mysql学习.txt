@@ -1,0 +1,56 @@
+
+id INT(10) PRIMARY KEY AUTO_INCERMENT NOT NULL UNIQUE
+CONSTRAINT _ID FOREIGN KEY(当前表中的列名) REFERENCES 约束对象的表名(列名)  #外键约束
+
+20171211mysql学习习题
+CREATE DATABASE gradesystem
+
+CREATE TABLE student
+(
+sid INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+sname CHAR(20) NOT NULL,
+gender CHAR(6)
+);
+
+
+CREATE TABLE course
+(
+cid INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+cname CHAR(20) NOT NULL
+);
+
+
+
+alter 
+
+
+CREATE TABLE mark
+(
+mid INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+sid INT(10) NOT NULL,
+cid INT(10) NOT NULL,
+score INT(5),
+CONSTRAINT KEY_SID FOREIGN KEY(sid) REFERENCES student(sid),
+CONSTRAINT KEY_CID FOREIGN KEY(cid) REFERENCES course(cid)
+);
+
+INSERT INTO student (sname,gender) VALUES ('Tom','male');
+INSERT INTO student (sname,gender) VALUES ('Jack','male');
+INSERT INTO student (sname,gender) VALUES ('Rose','female')
+
+
+INSERT INTO course (cname) VALUES ('math');
+INSERT INTO course (cname) VALUES ('physics');
+INSERT INTO course (cname) VALUES ('chemistry')
+
+
+INSERT INTO mark (sid,cid,score) VALUES (1,1,80);
+INSERT INTO mark (sid,cid,score) VALUES (2,1,85);
+INSERT INTO mark (sid,cid,score) VALUES (3,1,90);
+INSERT INTO mark (sid,cid,score) VALUES (1,2,60);
+INSERT INTO mark (sid,cid,score) VALUES (2,2,90);
+INSERT INTO mark (sid,cid,score) VALUES (3,2,75);
+INSERT INTI mark (sid,cid,score) VALUES (1,3,95);
+INSERT INTO mark (sid,cid,score) VALUES (2,3,75);
+INSERT INTO mark (sid,cid,score) VALUES (3,3,85);
+
