@@ -22,4 +22,13 @@ git add 文件名1 文件名2    #将新的或改动过的文件添加到本地索引中
 
 git commit -m "备注"    #做提交动作
 
-git push -u origin 分支名   #默认是master，首次加上分支名，以后就不需要了
+git remote add origin git的链接地址  #关联服务端的地址
+
+git push -u origin 分支名   #默认是master，首次加上分支名和-u参数，以后就不需要了
+
+git rm 文件名    #删除文件
+git reset --hard HEAD    #撤销
+
+git fetch    #查看仓库的改动
+
+git pull      #将仓库同步到本地
