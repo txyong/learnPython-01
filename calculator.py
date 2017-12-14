@@ -21,8 +21,7 @@ try:
     elif x > 80000:
         b = x * 0.45 - 13505
 
-    c = format(b,".2f")
-    print("税额为",c)
+    print(format(b,".2f"))
 except:
     print("Parameter Error")
     
