@@ -2,9 +2,9 @@
 import sys
 try:
     a = int(float(sys.argv[1]))
-    if len(sys.argv) == 2:
-        x = a - 3500
-        if x <= -3500:
+    if len(sys.argv) == 2:     #判断参数数量
+        x = a - 3500          
+        if x <= -3500:          #判断参数是否小于0
             print("Parameter Error")
         else:
             if x > -3500 and x < 1:
