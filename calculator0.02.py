@@ -46,13 +46,13 @@ def main():
         print('Parameter Error')
         exit()
     try:
-        income = int(sys.argv[1]) #判断是否为整数,并数值化
+        income = int(sys.argv[1]) #判断是否为整数,并数值化,传给income
     except ValueError:
         print('Parameter Error')
-        exit()
+        exit()                    #遇到异常就退出,一般的小异常会用打印日志,如果一有异常就退出,会导致程序关闭.
     value = income - 3500
-    if value <= 0:
-        result = 0
+    if value <= 0:               #小于0,就是工资小于3500
+        result = 0               #强制置为0
     elif 0 < value <= 1500:
         result = value * 0.03 - 0
     elif 1500 < value <= 4500:
@@ -67,11 +67,11 @@ def main():
         result = value * 0.35 - 5505
     else:
         result = income * 0.45 - 13505
-    print('{:.2f}'.format(result))
+    print('{:.2f}'.format(result))     #format格式化输出
 
 
 if __name__ == '__main__':
-main()
+    main()
 
 
 
@@ -79,9 +79,9 @@ main()
 
 def calc_income_tax(income):
     taxable_part = income - 3500
-    if taxable_part <= 0:
-        return '0.00'
-    income_tax_quick_lookup_table = [
+    if taxable_part <= 0:             #先判断小于0
+        return '0.00'                 #直接返回0
+    income_tax_quick_lookup_table = [   #包含元组的列表
         (80000, 0.45, 13505),
         (55000, 0.35, 5505),
         (35000, 0.30, 2755),
@@ -90,10 +90,10 @@ def calc_income_tax(income):
         (1500, 0.1, 105),
         (0, 0.03, 0)
     ]
-    for item in income_tax_quick_lookup_table:
-        if taxable_part > item[0]:
+    for item in income_tax_quick_lookup_table:  #一个一个元素的获取,第一次获取的是(80000, 0.45, 13505)
+        if taxable_part > item[0]:               #将第一个获取的(80000, 0.45, 13505)第0个值取出进行判断
             result = taxable_part * item[1] - item[2]
-            return '{:.2f}'.format(result)
+            return '{:.2f}'.format(result)       #这个return是条件执行了就退出,不继续循环了
 
 
 def main():
@@ -110,6 +110,6 @@ def main():
 
 
 if __name__ == '__main__':
-main()
+    main()                         #开始调用函数,前面的函数是先定义,还没开始调用执行,是从这个开始调用.
 
 
