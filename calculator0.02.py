@@ -42,11 +42,11 @@ import sys
 
 
 def main():
-    if len(sys.argv) != 2:        #如果不等于2
+    if len(sys.argv) != 2:        #如果传入的参数数量（len()是统计数量）不等于2，此处用于检查是否传入了正确的参数数量
         print('Parameter Error')
         exit()
     try:
-        income = int(sys.argv[1]) #判断是否为整数,并数值化,传给income
+        income = int(sys.argv[1]) #判断是否为整数,并转换成整数,传给income
     except ValueError:
         print('Parameter Error')
         exit()                    #遇到异常就退出,一般的小异常会用打印日志,如果一有异常就退出,会导致程序关闭.
@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
 
 
-实验楼的方法2
+实验楼的方法2   代码要遵循PEP8 Python 编码规范
 
 def calc_income_tax(income):
     taxable_part = income - 3500
@@ -90,7 +90,7 @@ def calc_income_tax(income):
         (1500, 0.1, 105),
         (0, 0.03, 0)
     ]
-    for item in income_tax_quick_lookup_table:  #一个一个元素的获取,第一次获取的是(80000, 0.45, 13505)
+    for item in income_tax_quick_lookup_table:  #一个一个元素的获取,第一次获取的是(80000, 0.45, 13505)，名称也要遵循pep8
         if taxable_part > item[0]:               #将第一个获取的(80000, 0.45, 13505)第0个值取出进行判断
             result = taxable_part * item[1] - item[2]
             return '{:.2f}'.format(result)       #这个return是条件执行了就退出,不继续循环了

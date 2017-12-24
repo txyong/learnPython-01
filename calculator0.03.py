@@ -47,17 +47,17 @@ except ValueError:
 	实验楼方法
 	
 import sys
-from collections import namedtuple
+from collections import namedtuple  #namedtuple让元组的每一项都有一个名字，这样程序就不容易出错，程序更健壮
 
 
-IncomeTaxQuickLookupItem = namedtuple(
-    'IncomeTaxQuickLookupItem',
-    ['start_point', 'tax_rate', 'quick_subtractor']
+IncomeTaxQuickLookupItem = namedtuple(   #namedtuple使用先定义一个名字
+    'IncomeTaxQuickLookupItem',         #定义的名字IncomeTaxQuickLookupItem
+    ['start_point', 'tax_rate', 'quick_subtractor']   #元组中三个元素的名称
 )
 
 INCOME_TAX_START_POINT = 3500
 
-INCOME_TAX_QUICK_LOOKUP_TABLE = [
+INCOME_TAX_QUICK_LOOKUP_TABLE = [               #根据前一个方法的列表，使用namedtuple后列表就变成这样了
     IncomeTaxQuickLookupItem(80000, 0.45, 13505),
     IncomeTaxQuickLookupItem(55000, 0.35, 5505),
     IncomeTaxQuickLookupItem(35000, 0.30, 2755),
@@ -67,7 +67,7 @@ INCOME_TAX_QUICK_LOOKUP_TABLE = [
     IncomeTaxQuickLookupItem(0, 0.03, 0)
 ]
 
-SOCIAL_INSURANCE_MONEY_RATE = {
+SOCIAL_INSURANCE_MONEY_RATE = {                 #将各项险金比例放入字典
     'endowment_insurance': 0.08,
     'medical_insurance': 0.02,
     'unemployment_insurance': 0.005,
@@ -78,26 +78,28 @@ SOCIAL_INSURANCE_MONEY_RATE = {
 
 
 def calc_income_tax_and_remain(income):
-    social_insurance_money = income * sum(SOCIAL_INSURANCE_MONEY_RATE.values())
+    social_insurance_money = income * sum(SOCIAL_INSURANCE_MONEY_RATE.values())  #将所有值取出用sum求出总和
+	                           sum计算总和  括号里是将字典里的所有值都取出                                            
     real_income = income - social_insurance_money
     taxable_part = real_income - INCOME_TAX_START_POINT
-    if taxable_part <= 0:
-        return '0.00', '{:.2f}'.format(real_income)
-    for item in INCOME_TAX_QUICK_LOOKUP_TABLE:
-        if taxable_part > item.start_point:
+    if taxable_part <= 0:      #判断小于3500工资的情况，不用纳税
+        return '0.00', '{:.2f}'.format(real_income)  # 直接返回0和扣除险金后的工资
+    for item in INCOME_TAX_QUICK_LOOKUP_TABLE:         #用for去遍历个税的表给item
+        if taxable_part > item.start_point:          #这里不再使用前例中item【0】的方式了，使用一个名称
             tax = taxable_part * item.tax_rate - item.quick_subtractor
             return '{:.2f}'.format(tax), '{:.2f}'.format(real_income - tax)
-
+                       这个是返回个税字符串             这个是税后工资的字符串
 
 def main():
-    for item in sys.argv[1:]:
-        employee_id, income_string = item.split(':')
+    for item in sys.argv[1:]:       #获取除自己文件名后面的参数，相当于切片概念
+        employee_id, income_string = item.split(':')  #split后的冒号是在字符串中以冒号为分割成两个字符串，第一个传给employee_id第二个传给income_string
         try:
-            income = int(income_string)
+            income = int(income_string)  #开始转成整数，这里还有错误输出的控制
         except ValueError:
-            print('Parameter Error')
-        _, remain = calc_income_tax_and_remain(income)
+            print('Parameter Error')    #错误输出
+        _, remain = calc_income_tax_and_remain(income)  #前面的函数是获取到了两个字符串，下划线是将获取的第一个字符串丢弃
         print('{}:{}'.format(employee_id, remain))
+		      这个是格式化输出方式，前面是告诉程序要按什么方式将结果打印出来。这里的第一个{}是员工号，冒号后面的一个{}是税后工资，format()是格式化函数，括号里面是需要输出的结果
 
 
 if __name__ == '__main__':

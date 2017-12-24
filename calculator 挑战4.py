@@ -1,6 +1,6 @@
 import sys
 import csv
-import queue
+import queue  #异常处理
 from multiprocessing import Process, Queue
 from collections import namedtuple
 
@@ -107,7 +107,7 @@ class Config(object):
 config = Config()
 
 
-class UserData(Process):
+class UserData(Process):      #进程类
 
     def _read_users_data(self):
         with open(args.userdata_path) as f:
@@ -118,11 +118,11 @@ class UserData(Process):
                 except ValueError:
                     print('Parameter Error')
                     exit()
-                yield (employee_id, income)
+                yield (employee_id, income)     #在这里是个生成器，在这里实现每次读取一个元素后暂停，元素传给下面后再执行
 
-    def run(self):
-        for data in self._read_users_data():
-            q_user.put(data)
+    def run(self):           #必须有这个run()
+        for data in self._read_users_data():   #获取上面yield()得到的元素
+            q_user.put(data)        #放入q_user
 
 
 class IncomeTaxCalculator(Process):
