@@ -23,14 +23,14 @@ class Huoqucfg(object):
         return self.peizhi('-c')
     @property
     def user_path(self):
-        print(self.peizhi('-c'))
+        
         return self.peizhi('-d')
     
     #def shuchu_path(self):
         #return self.peizhi('-o')
         
 huoqucfg = Huoqucfg()
-
+print(huoqucfg.user_path)
 class Config(object):
     def __init__(self):
         self.conf = self.read_conf()
@@ -70,20 +70,24 @@ class Config(object):
 config = Config()    
 
 
-class userdata(object):
+class Userdata(object):
     def __init__(self):
-        self.user = self.read_user()
-        
+        self.userdata = self.read_user()
+    @property    
     def read_user(self):
         userdatapath = huoqucfg.user_path
         userdata = []
         with open(userdatapath) as file:
             for line in file.readlines():
                 id,gongzi = line.split(',')
-                #gongzi = int(gongzi)
-                print(id)
-                #userdata.append((id,gongzi))
-        print(userdatapath)        
+                gongzi = int(gongzi)
+               
+                userdata.append((id,gongzi))
+                
         return userdata
+
+
+
+#print(Userdata.read_user())
         
     
