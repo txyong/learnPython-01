@@ -1,35 +1,19 @@
-def calc_income_tax(income):
-    taxable_part = income - 3500
-    if taxable_part <= 0:
-        return '0.00'
-    income_tax_quick_lookup_table = [
-        (80000, 0.45, 13505),
-        (55000, 0.35, 5505),
-        (35000, 0.30, 2755),
-        (9000, 0.25, 1005),
-        (4500, 0.2, 555),
-        (1500, 0.1, 105),
-        (0, 0.03, 0)
-    ]
-    for item in income_tax_quick_lookup_table:
-        if taxable_part > item[0]:
-            result = taxable_part * item[1] - item[2]
-            print ('{:.2f}'.format(result))
-            print(item[0],item[1],item[2])
+def make_pizza(size,*toppings):
+    
+    if size == 16:
+        menu = 1
+    elif size == 18:
+        menu = 2
+    print("\nMaking a" + str(size) + "-inch pizzawith the")
+    for toping in toppings:
+        print("-",size, toping,menu)
+    print(type(menu))
+
+make_pizza(16,'pepperoni')
+
+make_pizza(18,'mushrooms','green peppers','extra cheese')
 
 
-def main():
-    import sys
-    if len(sys.argv) != 2:
-        print('Parameter Error')
-        exit()
-    try:
-        income = int(sys.argv[1])
-    except ValueError:
-        print('Parameter Error')
-        exit()
-    print(calc_income_tax(income))
 
 
-if __name__ == '__main__':
-    main()
+    
